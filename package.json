@@ -1,7 +1,7 @@
 {
   "name": "smt-health-service",
   "version": "0.1.0",
-  "description": "Servico minimo do SMT (Sistema de Monitoramento de Trafego) seguindo o 12-Factor App",
+  "description": "API com /health seguindo o 12-Factor App",
   "private": true,
   "type": "module",
   "main": "src/server.js",
