@@ -5,8 +5,12 @@ import config from '../src/config.js';
 const erros = [];
 const niveis = ['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent'];
 
-if (!Number.isInteger(config.port) || config.port < 1 || config.port > 65535) {
-  erros.push(`PORT invalida: ${process.env.PORT}`);
+// Olha o valor cru: no config.js um PORT invalido cairia no padrao 3000 sem avisar
+const portaCrua = process.env.PORT;
+if (portaCrua !== undefined && !/^\d+$/.test(portaCrua)) {
+  erros.push(`PORT invalida: ${portaCrua}`);
+} else if (config.port < 1 || config.port > 65535) {
+  erros.push(`PORT fora do intervalo: ${config.port}`);
 }
 if (!niveis.includes(config.logLevel)) {
   erros.push(`LOG_LEVEL invalido: ${config.logLevel} (use ${niveis.join(', ')})`);
